@@ -1,15 +1,20 @@
 
 CC      = gcc
 CXX     = g++
-CFLAGS  = -Wall -O2 -D_GNU_SOURCE
+INSTALL = install
+CFLAGS  = -Wall -O3 -D_GNU_SOURCE
 
-SOURCE = \
-		NextionDriver.c basicFunctions.c processCommands.c processButtons.c helpers.c
+PREFIX = /usr/local
 
-all:		clean NextionDriver
+SOURCE = NextionDriver.c basicFunctions.c processCommands.c processButtons.c helpers.c
+
+all:	clean NextionDriver
 
 NextionDriver:
-		$(CC) $(SOURCE) $(CFLAGS) -o NextionDriver
+	$(CC) $(SOURCE) $(CFLAGS) -o NextionDriver
 
 clean:
-		$(RM) NextionDriver *.o *.d *.bak *~
+	$(RM) NextionDriver *.o *.d *.bak *~
+
+install: NextionDriver
+	$(INSTALL) -s NextionDriver $(PREFIX)/bin
